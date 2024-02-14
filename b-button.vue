@@ -1,9 +1,14 @@
+<!-- converted -->
 <template>
     <template v-if="href !== null">
-        <a :href="href" class="btn" :class="[ this.$attrs['class'], variant !== null ? 'btn-'+ variant : '',  size !== null ? 'btn-'+ size: '']" target="_self"><slot></slot></a>
+        <a :href="href" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :class="[ $attrs.class, size ? 'btn-' + size : '']" target="_self">
+            <slot></slot>
+        </a>
     </template>
     <template v-else>
-        <button type="button" class="btn" :class="[ this.$attrs['class'], variant !== null ? 'btn-'+ variant : '',  size !== null ? 'btn-'+ size: '']"><slot></slot></button>
+        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :class="[ $attrs.class, size ? 'btn-' + size : '']">
+            <slot></slot>
+        </button>
     </template>
 </template>
 
@@ -11,10 +16,6 @@
 export default {
     props: {
         href: {
-            type: String,
-            default: null,
-        },
-        variant: {
             type: String,
             default: null,
         },

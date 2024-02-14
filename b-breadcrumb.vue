@@ -1,11 +1,10 @@
+<!-- converted -->
 <template>
     <ol class="breadcrumb">
-        <template v-for="(item, index) in items" class="breadcrumb-item">
-            <li v-if="items.length !== index + 1" class="breadcrumb-item">
-                <a :href="item.href" target="_self" class="">{{ item.text }}</a>
-            </li>
-            <li v-else class="breadcrumb-item active">
-                <span aria-current="location">{{ item.text }}</span>
+        <template v-for="(item, index) in items" :key="index">
+            <li :class="{ 'breadcrumb-item': true, 'active': items.length === index + 1 }">
+                <a v-if="items.length !== index + 1" :href="item.href" target="_self">{{ item.text }}</a>
+                <span v-else aria-current="location">{{ item.text }}</span>
             </li>
         </template>
     </ol>
