@@ -1,0 +1,17 @@
+{
+  "name": "b-vuejs3-elements",
+  "version": "1.1.0",
+  "description": "b-vuejs3-elements",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixsil/b-vuejs3-elements.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pixsil/b-vuejs3-elements/issues"
+  },
+  "homepage": "https://github.com/pixsil/b-vuejs3-elements#readme"
+}
