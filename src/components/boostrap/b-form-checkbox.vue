@@ -1,11 +1,11 @@
 <template>
     <div v-if="$attrs.hasOwnProperty('switch')" class="custom-control custom-switch">
-        <input id="archived" :checked="modelValue" type="checkbox"  class="custom-control-input">
-        <label for="archived" class="custom-control-label" @click="$emit('update:modelValue', !modelValue)"></label>
+        <input :id="'switch-'+ this.$.uid" :checked="modelValue" type="checkbox"  class="custom-control-input">
+        <label :for="'switch-'+ this.$.uid" class="custom-control-label" @click="$emit('update:modelValue', !modelValue)"></label>
     </div>
     <div v-else class="custom-control custom-checkbox">
-        <input id="archived" :value="value" :checked="is_checked" type="checkbox"  class="custom-control-input">
-        <label for="archived" class="custom-control-label" @click="updateArray()"></label>
+        <input :id="'switch-'+ this.$.uid" :value="value" :checked="is_checked" type="checkbox"  class="custom-control-input">
+        <label :for="'switch-'+ this.$.uid" class="custom-control-label" @click="updateArray()"></label>
     </div>
 </template>
 
