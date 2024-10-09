@@ -1,6 +1,6 @@
 {
   "name": "b-vuejs3-elements",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "b-vuejs3-elements",
   "main": "src/index.js",
   "module": "src/index.js",

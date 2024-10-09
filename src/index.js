@@ -1,5 +1,5 @@
 // Bootstrap components
-export * from './components/boostrap/index.js';
+export * from './components/bootstrap/index.js';
 
 // Tailwind components
 export * from './components/tailwind/index.js';

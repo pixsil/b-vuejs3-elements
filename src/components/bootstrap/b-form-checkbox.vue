@@ -1,11 +1,7 @@
 <template>
-    <div v-if="$attrs.hasOwnProperty('switch')" class="custom-control custom-switch">
-        <input :id="'switch-'+ this.$.uid" :checked="modelValue" type="checkbox"  class="custom-control-input">
-        <label :for="'switch-'+ this.$.uid" class="custom-control-label" @click="$emit('update:modelValue', !modelValue)"></label>
-    </div>
-    <div v-else class="custom-control custom-checkbox">
-        <input :id="'switch-'+ this.$.uid" :value="value" :checked="is_checked" type="checkbox"  class="custom-control-input">
-        <label :for="'switch-'+ this.$.uid" class="custom-control-label" @click="updateArray()"></label>
+    <div class="custom-control custom-checkbox">
+        <input :id="'checkbox-'+ this.$.uid" :value="value" :checked="is_checked" type="checkbox"  class="custom-control-input">
+        <label :for="'checkbox-'+ this.$.uid" class="custom-control-label" @click="updateArray()"></label>
     </div>
 </template>
 
@@ -53,7 +49,13 @@ export default {
 
     computed: {
         is_checked() {
-            return this.modelValue.indexOf(this.value) !== -1;
+            let result = this.modelValue;
+
+            if (Array.isArray(this.modelValue)) {
+                result = this.modelValue.indexOf(this.value) !== -1;
+            }
+
+            return result;
         }
     }
 }
@@ -172,42 +174,6 @@ export default {
     }
 
     .custom-radio .custom-control-input:disabled:checked~.custom-control-label:before {
-        background-color: rgba(7,142,29,.5)
-    }
-
-    .custom-switch {
-        padding-left: 2.25rem
-    }
-
-    .custom-switch .custom-control-label:before {
-        border-radius: .5rem;
-        left: -2.25rem;
-        pointer-events: all;
-        width: 1.75rem
-    }
-
-    .custom-switch .custom-control-label:after {
-        background-color: #adb5bd;
-        border-radius: .5rem;
-        height: calc(1rem - 4px);
-        left: calc(-2.25rem + 2px);
-        top: calc(.22rem + 2px);
-        transition: transform .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        width: calc(1rem - 4px)
-    }
-
-    @media (prefers-reduced-motion:reduce) {
-        .custom-switch .custom-control-label:after {
-            transition: none
-        }
-    }
-
-    .custom-switch .custom-control-input:checked~.custom-control-label:after {
-        background-color: #fff;
-        transform: translateX(.75rem)
-    }
-
-    .custom-switch .custom-control-input:disabled:checked~.custom-control-label:before {
         background-color: rgba(7,142,29,.5)
     }
 
