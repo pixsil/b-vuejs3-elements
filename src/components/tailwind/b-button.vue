@@ -1,8 +1,8 @@
 <template>
     <template v-if="href !== null">
         <a :href="disabled ? null : href"
+           @click="disabled && $event.preventDefault()"
            :class="['border font-bold py-2 px-4 rounded inline-block', { 'opacity-50 cursor-not-allowed': disabled }]"
-           @click.prevent="disabled ? null : undefined"
            target="_self">
             <slot></slot>
         </a>
