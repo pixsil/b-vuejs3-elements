@@ -1,12 +1,17 @@
-<!-- converted -->
 <template>
     <template v-if="href !== null">
-        <a :href="href" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :class="[ $attrs.class, size ? 'btn-' + size : '']" target="_self">
+        <a :href="disabled ? null : href"
+           :class="['border font-bold py-2 px-4 rounded inline-block', { 'opacity-50 cursor-not-allowed': disabled }]"
+           @click.prevent="disabled ? null : undefined"
+           target="_self">
             <slot></slot>
         </a>
     </template>
     <template v-else>
-        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :class="[ $attrs.class, size ? 'btn-' + size : '']">
+        <button
+            type="button"
+            :disabled="disabled"
+            :class="['border font-bold py-2 px-4 rounded', { 'opacity-50 cursor-not-allowed': disabled }]">
             <slot></slot>
         </button>
     </template>
@@ -23,6 +28,10 @@ export default {
             type: String,
             default: null,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     components: {},
@@ -32,25 +41,15 @@ export default {
     },
 
     methods: {
-        submit() {
-            // this.vueForm.post('/site-feedback')
-            //     .then(response => this.onSuccess())
-        },
-        onSuccess() {
-        },
     },
 
     mounted() {
     },
 
     created() {
-        console.log();
-        // Event.('event', () => {});
     },
 
-
     computed: {
-        // func() {}
     }
 }
 </script>

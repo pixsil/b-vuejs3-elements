@@ -9,7 +9,6 @@
             </label>
             <input type="file"
                    :disabled="readOnly"
-                   accept="application/pdf"
                    class="custom-file-input"
                    ref="file"
                    style="z-index: -5;"
