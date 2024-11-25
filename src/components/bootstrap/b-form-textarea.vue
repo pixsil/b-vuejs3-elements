@@ -1,6 +1,7 @@
 <template>
     <textarea :value="modelValue"
               @input="resizeTextarea"
+              ref="textarea"
               id="textarea"
               wrap="soft"
               class="form-control"
@@ -12,20 +13,37 @@
 export default {
     props: {
         modelValue: String,
+        noAutoShrink: {
+            type: Boolean,
+            default: false,
+        },
     },
 
-    components: {},
-
     data() {
-        return {}
+        return {
+            max_height: null,
+        };
     },
 
     methods: {
         resizeTextarea(event) {
             const textarea = event.target;
-            textarea.style.height = 'auto'; // Reset the height
-            textarea.style.height = `${textarea.scrollHeight}px`; // Adjust to fit content
-            this.$emit('update:modelValue', textarea.value); // Update modelValue
+
+            // reset for calculation
+            textarea.style.height = 'auto';
+            let new_height = textarea.scrollHeight;
+
+            if (this.max_height < new_height) {
+                this.max_height = textarea.scrollHeight;
+            }
+
+            if (this.noAutoShrink) {
+                textarea.style.height = `${this.max_height}px`;
+            } else {
+                textarea.style.height = `${new_height}px`;
+            }
+
+            this.$emit('update:modelValue', textarea.value);
         },
     },
 
@@ -43,7 +61,4 @@ export default {
 </script>
 
 <style scoped>
-textarea {
-    transition: height 0.2s ease; /* Optional: smooth height adjustment */
-}
 </style>
