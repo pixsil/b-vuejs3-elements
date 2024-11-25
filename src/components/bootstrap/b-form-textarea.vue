@@ -1,5 +1,11 @@
 <template>
-    <textarea :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" id="textarea" wrap="soft" class="form-control" style="resize: none; overflow-y: scroll; height: 84px;"></textarea>
+    <textarea :value="modelValue"
+              @input="resizeTextarea"
+              id="textarea"
+              wrap="soft"
+              class="form-control"
+              style="resize: none; overflow-y: hidden;">
+    </textarea>
 </template>
 
 <script>
@@ -15,11 +21,11 @@ export default {
     },
 
     methods: {
-        submit() {
-            // this.vueForm.post('/site-feedback')
-            //     .then(response => this.onSuccess())
-        },
-        onSuccess() {
+        resizeTextarea(event) {
+            const textarea = event.target;
+            textarea.style.height = 'auto'; // Reset the height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Adjust to fit content
+            this.$emit('update:modelValue', textarea.value); // Update modelValue
         },
     },
 
@@ -37,4 +43,7 @@ export default {
 </script>
 
 <style scoped>
+textarea {
+    transition: height 0.2s ease; /* Optional: smooth height adjustment */
+}
 </style>
