@@ -1,6 +1,6 @@
 <template>
     <textarea :value="modelValue"
-              @input="resizeTextarea"
+              @input="onChange"
               ref="textarea"
               id="textarea"
               wrap="soft"
@@ -26,15 +26,25 @@ export default {
     },
 
     methods: {
-        resizeTextarea(event) {
+        onChange(event) {
             const textarea = event.target;
 
-            // reset for calculation
+            this.resizeTextarea(textarea);
+
+            this.$emit('update:modelValue', textarea.value);
+        },
+        resizeTextarea(textarea)
+        {
+            // Reset for calculation
             textarea.style.height = 'auto';
-            let new_height = textarea.scrollHeight;
+            const new_height = textarea.scrollHeight;
+
+            if (!this.max_height) {
+                this.max_height = new_height;
+            }
 
             if (this.max_height < new_height) {
-                this.max_height = textarea.scrollHeight;
+                this.max_height = new_height;
             }
 
             if (this.noAutoShrink) {
@@ -42,22 +52,16 @@ export default {
             } else {
                 textarea.style.height = `${new_height}px`;
             }
-
-            this.$emit('update:modelValue', textarea.value);
         },
     },
 
     mounted() {
+        this.$nextTick(() => {
+            // Initialize the textarea size on mount
+            this.resizeTextarea(this.$refs.textarea);
+        });
     },
-
-    created() {
-        // Event.('event', () => {});
-    },
-
-
-    computed: {
-    }
-}
+};
 </script>
 
 <style scoped>
